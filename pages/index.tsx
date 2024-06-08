@@ -4,8 +4,8 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import abi from '../GovernanceToken.json';
-import { FrameValidationData } from '@coinbase/onchainkit';
-import { FrameRequest, getFrameMessage } from '@coinbase/onchainkit/frame';
+import { FrameValidationData } from '@coinbase/onchainkit/src/frame';
+import { FrameRequest, getFrameMessage } from '@coinbase/onchainkit/src/frame';
 
 const Home: NextPage = () => {
   const HOST_URL = process.env.NEXT_PUBLIC_HOST_URL;

@@ -3,7 +3,7 @@ import {
   FrameRequest,
   FrameValidationData,
   getFrameMessage,
-} from '@coinbase/onchainkit/src/frame';
+} from '@coinbase/onchainkit/frame';
 import token_abi from '../../GovernanceToken.json';
 import { ethers } from 'ethers';
 
@@ -57,11 +57,11 @@ export default async function handler(
 
       // Return the transaction frame
       return res.status(200).json({
-        chainId: 'eip155:10',
+        chainId: 'eip155:42161',
         method: 'eth_sendTransaction',
         params: {
           abi: token_abi,
-          to: '0x4200000000000000000000000000000000000042',
+          to: '0x912ce59144191c1204e64559fe8253a0e49e6548',
           data: data,
           value: '0',
         },

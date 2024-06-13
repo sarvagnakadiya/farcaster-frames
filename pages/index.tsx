@@ -1,16 +1,16 @@
-import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { ethers } from 'ethers'; // Import ethers library
-import type { NextPage } from 'next';
-import Head from 'next/head';
-import styles from '../styles/Home.module.css';
-import abi from '../GovernanceToken.json';
-import { FrameValidationData } from '@coinbase/onchainkit/frame';
-import { FrameRequest, getFrameMessage } from '@coinbase/onchainkit/frame';
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { ethers } from "ethers"; // Import ethers library
+import type { NextPage } from "next";
+import Head from "next/head";
+import styles from "../styles/Home.module.css";
+import abi from "../GovernanceToken.json";
+import { FrameValidationData } from "@coinbase/onchainkit/frame";
+import { FrameRequest, getFrameMessage } from "@coinbase/onchainkit/frame";
 
 const Home: NextPage = () => {
   const HOST_URL = process.env.NEXT_PUBLIC_HOST_URL;
 
-  const contractAddress = '0x4200000000000000000000000000000000000042'; // Replace with your contract address
+  const contractAddress = "0x4200000000000000000000000000000000000042"; // Replace with your contract address
 
   // Handle delegate function
   const handleDelegate = async () => {
@@ -19,17 +19,17 @@ const Home: NextPage = () => {
     const contract = new ethers.Contract(contractAddress, abi.abi, signer);
     try {
       const tx = await contract.delegate(
-        '0x97861976283e6901b407D1e217B72c4007D9F64D'
+        "0x97861976283e6901b407D1e217B72c4007D9F64D"
       );
       await tx.wait();
-      console.log('Delegate successful');
+      console.log("Delegate successful");
     } catch (error) {
-      console.error('Contract write failed', error);
+      console.error("Contract write failed", error);
     }
   };
 
   const getFarcasterAccountAddress = (
-    interactor: FrameValidationData['interactor']
+    interactor: FrameValidationData["interactor"]
   ) => {
     // Get the first verified account or the custody address
     console.log(interactor.verified_accounts[0] ?? interactor.custody_address);
@@ -40,8 +40,8 @@ const Home: NextPage = () => {
     const { isValid, message } = await getFrameMessage(frameRequest);
 
     isValid
-      ? console.log('Message is valid:', message)
-      : console.error('Message is invalid:', message);
+      ? console.log("Message is valid:", message)
+      : console.error("Message is invalid:", message);
 
     return { isValid, message };
   }
@@ -58,10 +58,10 @@ const Home: NextPage = () => {
         <meta property="og:description" content="THE OG DESC" />
         <meta property="fc:frame" content="vNext" />
         <meta property="fc:frame:image" content={`${HOST_URL}/GTR.jpg`} />
-        <meta
+        {/* <meta
           property="fc:frame:image"
           content="https://www.example.com/path-to-open-source-image.jpg"
-        />
+        /> */}
         <meta property="fc:frame:button:1" content="Delegate" />
         <meta property="fc:frame:button:1:action" content="tx" />
         <meta

@@ -6,6 +6,7 @@ import {
 } from "@coinbase/onchainkit/frame";
 import token_abi from "../../GovernanceToken.json";
 import { ethers } from "ethers";
+import { init, validateFramesMessage } from "@airstack/frames";
 
 export default async function handler(
   req: NextApiRequest,
@@ -32,6 +33,12 @@ export default async function handler(
         req.body as FrameRequest
       );
 
+      init(process.env.AIRSTACK_API);
+      const { isValid2, message2 } = await validateFramesMessage(req.body);
+
+      console.log("is valid:", isValid2);
+      console.log("the message:", message2);
+
       if (!isValid) {
         console.log("Frame Invalid");
         return res.status(400).json({ message: "Frame Invalid" });
@@ -43,10 +50,10 @@ export default async function handler(
       const interactorAddress = getFarcasterAccountAddress(message?.interactor);
       console.log("Farcaster Account Address:", interactorAddress);
 
-      if (!delegateAddress) {
-        console.error("Delegate address not found in the URL:", url);
-        return res.status(400).json({ message: "Invalid Frame Message" });
-      }
+      //   if (!delegateAddress) {
+      //     console.error("Delegate address not found in the URL:", url);
+      //     return res.status(400).json({ message: "Invalid Frame Message" });
+      //   }
 
       console.log("Extracted Delegate Address:", delegateAddress);
 
@@ -59,7 +66,7 @@ export default async function handler(
         return encodedData;
       };
 
-      const data = await encodeData(delegateAddress);
+      const data = await encodeData(interactorAddress);
       console.log("Data for transaction:", data);
 
       // Return the transaction frame

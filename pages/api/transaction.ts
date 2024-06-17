@@ -28,16 +28,15 @@ export default async function handler(
       return address;
     };
 
+    const api_key: string = process.env.AIRSTACK_API as string;
+    init(api_key);
+    const { isValid, message } = await validateFramesMessage(req.body);
+    console.log("is valid:", isValid);
+    console.log("the message:", message);
     try {
       const { isValid, message } = await getFrameMessage(
         req.body as FrameRequest
       );
-
-      init(process.env.AIRSTACK_API);
-      const { isValid2, message2 } = await validateFramesMessage(req.body);
-
-      console.log("is valid:", isValid2);
-      console.log("the message:", message2);
 
       if (!isValid) {
         console.log("Frame Invalid");

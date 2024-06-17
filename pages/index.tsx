@@ -10,7 +10,7 @@ import { FrameRequest, getFrameMessage } from "@coinbase/onchainkit/frame";
 const Home: NextPage = () => {
   const HOST_URL = process.env.NEXT_PUBLIC_HOST_URL;
 
-  const contractAddress = "0x4200000000000000000000000000000000000042"; // Replace with your contract address
+  const contractAddress = "0x4200000000000000000000000000000000000042";
 
   // Handle delegate function
   const handleDelegate = async () => {
